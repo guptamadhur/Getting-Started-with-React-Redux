@@ -1,0 +1,17 @@
+#app {
+  margin: 0 auto;
+  font-size: small;
+}
+
+nav {
+  padding: 20px 0 20px 0;
+}
+
+.roundBtn {
+  border: 2px solid !important;
+  border-radius: 40px !important;
+}
+
+.btn-outline-info {
+  color: rgb(111, 201, 250);
+}
