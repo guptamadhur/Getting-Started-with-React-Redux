@@ -1,0 +1,6 @@
+.imgPreview img {
+    text-align: center;
+    margin: 5px 15px;
+    max-height: 100px;
+    max-width: 100px;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
-import ImageInput from "../common/ImageInput";
+import ImageUpload from "../common/ImageUpload";
 
 const ProductForm = ({
   product,
@@ -43,7 +43,7 @@ const ProductForm = ({
           error={errors.price}
         />
 
-        <ImageInput
+        <ImageUpload
           name="image"
           label="PRODUCT IMAGE"
           value={product.image}

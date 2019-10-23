@@ -12,7 +12,7 @@ const CartList = ({ products, onAddClick, onRemoveClick }) => {
             {product.image != "" ? (
               <img
                 className="card-img-top"
-                alt="product.name.substring(0, 1)"
+                alt={product.name.substring(0, 1)}
                 src={product.image}
               />
             ) : (
