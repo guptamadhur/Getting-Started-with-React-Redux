@@ -18,6 +18,18 @@ export function deleteProductOptimistic(product) {
   return { type: types.DELETE_PRODUCT_OPTIMISTIC, product };
 }
 
+export function addQuantitySuccess(product) {
+  return { type: types.ADD_QUANTITY_SUCCESS, product };
+}
+
+export function removeQuantitySuccess(product) {
+  return { type: types.REMOVE_QUANTITY_SUCCESS, product };
+}
+
+export function loadCartProductSuccess(products) {
+  return { type: types.LOAD_CART_PRODUCTS_SUCCESS, products };
+}
+
 export function loadProducts() {
   return function(dispatch) {
     dispatch(beginApiCall());
@@ -33,8 +45,22 @@ export function loadProducts() {
   };
 }
 
+export function loadCartProducts() {
+  return function(dispatch) {
+    dispatch(beginApiCall());
+    return productApi
+      .getProducts()
+      .then(products => {
+        dispatch(loadProductSuccess(products));
+      })
+      .catch(error => {
+        dispatch(apiCallError(error));
+        throw error;
+      });
+  };
+}
+
 export function saveProduct(product) {
-  debugger
   //eslint-disable-next-line no-unused-vars
   return function(dispatch, getState) {
     dispatch(beginApiCall());
@@ -47,6 +73,32 @@ export function saveProduct(product) {
       })
       .catch(error => {
         dispatch(apiCallError(error));
+        throw error;
+      });
+  };
+}
+
+export function addQuantity(product) {
+  console.log("product: ", product);
+  return function(dispatch, getState) {
+    return productApi
+      .saveProduct(product)
+      .then(dispatch(addQuantitySuccess(product)))
+      .catch(error => {
+        dispatch();
+        throw error;
+      });
+  };
+}
+
+export function removeQuantity(product) {
+  console.log("product: ", product);
+  return function(dispatch, getState) {
+    return productApi
+      .saveProduct(product)
+      .then(dispatch(removeQuantitySuccess(product)))
+      .catch(error => {
+        dispatch();
         throw error;
       });
   };

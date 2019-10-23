@@ -35,10 +35,10 @@ const CartList = ({ products, onAddClick, onRemoveClick }) => {
               ) : (
                 ""
               )}
-              {product.quantity ? (
-                <span className="mr-3 ml-3">{product.quantity}</span>
+              {product.quantity > 0 ? (
+                <span className="mr-3 ml-3">{product.quantity} in basket</span>
               ) : (
-                <span className="mr-3 ml-3">{product.quantity}</span>
+                ""
               )}
               <button
                 style={{}}
@@ -63,7 +63,7 @@ CartList.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    state:state,
+    state: state,
     products: state.products,
     loading: state.apiCallsInProgress > 0
   };

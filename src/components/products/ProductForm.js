@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
+import ImageInput from "../common/ImageInput";
 
 const ProductForm = ({
   product,
@@ -42,7 +43,7 @@ const ProductForm = ({
           error={errors.price}
         />
 
-        <TextInput
+        <ImageInput
           name="image"
           label="PRODUCT IMAGE"
           value={product.image}
@@ -58,11 +59,18 @@ const ProductForm = ({
           error={errors.description}
         />
         <div className="col-sm-12 text-center">
-          <button type="submit" disabled={saving} className="pl-4 pr-4 btn btn-primary roundBtn">
+          <button
+            type="submit"
+            disabled={saving}
+            className="pl-4 pr-4 btn btn-primary roundBtn"
+          >
             {saving ? "Saving..." : "Save"}
           </button>
           {/* TODO Reset button implementation */}
-          <button type="reset" className="ml-5 pl-4 pr-4 btn btn-primary roundBtn">
+          <button
+            type="reset"
+            className="ml-5 pl-4 pr-4 btn btn-primary roundBtn"
+          >
             Reset
           </button>
         </div>
@@ -72,7 +80,6 @@ const ProductForm = ({
 };
 
 ProductForm.propTypes = {
-  //products: PropTypes.array.isRequired,
   product: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,

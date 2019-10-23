@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import CartList from "../products/Card/CardList";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
-import * as cartActions from "../../redux/actions/cartActions";
 import * as productActions from "../../redux/actions/productActions";
 import { bindActionCreators } from "redux";
 
@@ -19,15 +18,22 @@ class HomePage extends React.Component {
   }
 
   handleAdd = product => {
-    toast.success(product.name + " Product Remove");
-    this.props.actions.addProduct(product);
-    //console.log("addedItems",this.props.addedItems);
+    toast.success(product.name + " Product Add");
+    let addProductQTY = { ...product, quantity: product.quantity + 1 };
+    this.props.actions.addQTY(addProductQTY);
   };
 
   handleRemove = product => {
     toast.warn(product.name + " Product Remove");
-    this.props.actions.removeProduct(product);
+    let removeProductQTY = { ...product, quantity: product.quantity - 1 };
+    this.props.actions.removeQTY(removeProductQTY);
   };
+
+  totalCount() {
+    return this.props.products
+      .map(item => item.quantity)
+      .reduce((prev, curr) => prev + curr, 0);
+  }
 
   render() {
     return (
@@ -36,8 +42,8 @@ class HomePage extends React.Component {
           <Spinner />
         ) : (
           <>
-            <div className="row shadow p-2 mb-4 bg-danger font-weight-bold text-center">
-              Home | Cart({this.total})
+            <div className="row shadow p-2 mb-4 bg-danger font-weight">
+              Home | Cart({this.totalCount()})
             </div>
             <div className="shadow-sm p-4 mb-4 bg-white">
               <CartList
@@ -55,7 +61,7 @@ class HomePage extends React.Component {
 
 HomePage.propTypes = {
   products: PropTypes.array.isRequired,
-  total:PropTypes.number.isRequired,
+  //total:PropTypes.number.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -63,7 +69,7 @@ HomePage.propTypes = {
 function mapStateToProps(state) {
   return {
     products: state.products,
-    total:state.cart.total,
+    //total:state.total,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -72,14 +78,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProducts: bindActionCreators(productActions.loadProducts, dispatch),
-      addProduct: bindActionCreators(
-        cartActions.addProductToCartAction,
-        dispatch
-      ),
-      removeProduct: bindActionCreators(
-        cartActions.removeProductFromCartAction,
-        dispatch
-      )
+      addQTY: bindActionCreators(productActions.addQuantity, dispatch),
+      removeQTY: bindActionCreators(productActions.removeQuantity, dispatch)
     }
   };
 }

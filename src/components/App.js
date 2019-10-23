@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
+import CartPage from "./cart/CartPage";
 import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
@@ -19,7 +20,7 @@ function App() {
         <Route path="/products" component={ProductsPage} />
         <Route path="/product/:slug" component={ManageProductPage} />
         <Route path="/product" component={ManageProductPage} />
-        <Route path="/cart" component={AboutPage} />
+        <Route path="/cart" component={CartPage} />
         <Route component={PageNotFound} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar />

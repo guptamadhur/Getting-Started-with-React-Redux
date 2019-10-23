@@ -8,7 +8,6 @@ export function getProducts() {
 }
 
 export function saveProduct(product) {
-  debugger
   return fetch(baseUrl + (product.id || ""), {
     method: product.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },
