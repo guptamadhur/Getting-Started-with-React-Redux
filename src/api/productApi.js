@@ -1,18 +1,19 @@
 import { handleResponse, handleError } from "./apiUtils";
-import axios from "axios";
 const mode = process.env.NODE_ENV;
 
-const baseUrl =  mode == "local" ? process.env.API_URL : process.env.API_URL_SERVER;
+const baseUrl =
+  mode == "local" ? process.env.API_URL : process.env.API_URL_SERVER;
 // const baseUrl=process.env.API_URL;
 
 export function getProducts() {
-  return fetch(baseUrl + `/products/`)
+  return fetch(baseUrl + `/product/all`)
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function saveProduct(product) {
-  return fetch(baseUrl + `/products/` + (product.id || ""), {
+  debugger;
+  return fetch(baseUrl + `/product`, {
     method: product.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },
     body: JSON.stringify(product)
@@ -22,8 +23,11 @@ export function saveProduct(product) {
 }
 
 export function deleteProduct(productId) {
-  debugger;
-  return fetch(baseUrl + `/products/` + productId, { method: "DELETE" })
+  return fetch(baseUrl + `/product`, {
+    method: "DELETE",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ id: productId })
+  })
     .then(handleResponse)
     .catch(handleError);
 }

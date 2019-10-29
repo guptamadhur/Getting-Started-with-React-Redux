@@ -61,7 +61,6 @@ class HomePage extends React.Component {
 
 HomePage.propTypes = {
   products: PropTypes.array.isRequired,
-  //total:PropTypes.number.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -69,7 +68,6 @@ HomePage.propTypes = {
 function mapStateToProps(state) {
   return {
     products: state.products,
-    //total:state.total,
     loading: state.apiCallsInProgress > 0
   };
 }

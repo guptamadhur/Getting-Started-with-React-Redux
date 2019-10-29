@@ -6,7 +6,7 @@
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3100",
     "prestart:api": "node tools/createMockDb.js",
     "start:api": "node tools/apiServer.js",
-    "poststart": "node tools/apiExpressServer.js",
+    "poststart": "nodemon tools/apiExpressServer.js",
     "server": "node tools/newapiServer.js"
   },
   "dependencies": {

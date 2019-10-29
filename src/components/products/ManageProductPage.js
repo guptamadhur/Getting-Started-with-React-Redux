@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loadProducts, saveProduct } from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import ProductForm from "./ProductForm";
-import {newProduct} from "../../../tools/mockData";
+import { newProduct } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 
@@ -53,6 +53,7 @@ function ManageProductPage({
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);
+    product.slug = product.name;
     saveProduct(product)
       .then(() => {
         toast.success("Product saved.");

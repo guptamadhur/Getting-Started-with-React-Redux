@@ -18,7 +18,6 @@ export default function productReducer(state = initialState.products, action) {
       return state.filter(product => product.id !== action.product.id);
 
     case types.LOAD_CART_PRODUCTS_SUCCESS:
-      debugger
       return state.filter(product => product.quantity > 0);
 
     case types.ADD_QUANTITY_SUCCESS:

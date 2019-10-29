@@ -61,8 +61,7 @@ export function loadCartProducts() {
 }
 
 export function saveProduct(product) {
-  //eslint-disable-next-line no-unused-vars
-  return function(dispatch, getState) {
+  return function(dispatch) {
     dispatch(beginApiCall());
     return productApi
       .saveProduct(product)
@@ -80,7 +79,7 @@ export function saveProduct(product) {
 
 export function addQuantity(product) {
   console.log("product: ", product);
-  return function(dispatch, getState) {
+  return function(dispatch) {
     return productApi
       .saveProduct(product)
       .then(dispatch(addQuantitySuccess(product)))
@@ -93,7 +92,7 @@ export function addQuantity(product) {
 
 export function removeQuantity(product) {
   console.log("product: ", product);
-  return function(dispatch, getState) {
+  return function(dispatch) {
     return productApi
       .saveProduct(product)
       .then(dispatch(removeQuantitySuccess(product)))
@@ -105,10 +104,21 @@ export function removeQuantity(product) {
 }
 
 export function deleteProduct(product) {
+  console.log("product: ", product);
   return function(dispatch) {
-    // Doing optimistic delete, so not dispatching begin/end api call
-    // actions, or apiCallError action since we're not showing the loading status for this.
-    dispatch(deleteProductOptimistic(product));
-    return productApi.deleteProduct(product.id);
+    return productApi
+      .deleteProduct(product.id)
+      .then(dispatch(deleteProductOptimistic(product)))
+      .catch(error => {
+        dispatch();
+        throw error;
+      });
   };
 }
+// return function(dispatch) {
+//   // Doing optimistic delete, so not dispatching begin/end api call
+//   // actions, or apiCallError action since we're not showing the loading status for this.
+//   dispatch(deleteProductOptimistic(product));
+//   return productApi.deleteProduct(product.id);
+// };
+//}
