@@ -20,7 +20,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",
-    "immer": "^7.0.8",
+    "immer": "^9.0.6",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "prop-types": "^15.7.2",
